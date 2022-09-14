@@ -1,5 +1,10 @@
 # Docker 101 @ Nerdearla 2022
 
+Estas son las instrucciones que seguí para mi charla de Nerdearla 101 en el año 2022.
+
+[![Watch the video](https://img.youtube.com/vi/IyXGesw8ZJY/maxresdefault.jpg)](https://youtu.be/IyXGesw8ZJY)
+
+
 Iniciar un contenedor busybox
 
 ```

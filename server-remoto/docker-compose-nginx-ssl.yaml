@@ -1,0 +1,55 @@
+version: '3.7'
+
+services:
+
+  mysql:
+    image: mysql:8
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+
+  wordpress:
+    image: wordpress:6.0.1-apache
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: root
+      WORDPRESS_DB_NAME: wordpress
+      VIRTUAL_HOST: wordpress.peladonerd.com
+      LETSENCRYPT_HOST: wordpress.peladonerd.com
+      LETSENCRYPT_EMAIL: pablo@peladonerd.com
+    volumes:
+      - ./wordpress:/var/www/html/wp-content
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy:1.0.1
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs:ro
+      - confd:/etc/nginx/conf.d
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion:v1.12
+    restart: always
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - confd:/etc/nginx/conf.d
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+volumes:
+  certs:
+  confd:
+  vhostd:
+  html:
