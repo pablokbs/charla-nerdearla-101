@@ -2,8 +2,9 @@
 
 Estas son las instrucciones que seguí para mi charla de Nerdearla 101 en el año 2022.
 
-[![Watch the video](https://img.youtube.com/vi/IyXGesw8ZJY/maxresdefault.jpg)](https://youtu.be/IyXGesw8ZJY)
-
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=IyXGesw8ZJY" target="_blank">
+ <img src="http://img.youtube.com/vi/IyXGesw8ZJY/mqdefault.jpg" alt="Watch the video" width="640" height="360" border="10" />
+</a>
 
 Iniciar un contenedor busybox
 
